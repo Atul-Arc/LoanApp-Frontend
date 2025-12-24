@@ -6,6 +6,7 @@ type NavItem = { to: string; label: string; end?: boolean }
 const navItems: NavItem[] = [
   { to: '/', label: 'Home', end: true },
   { to: '/chat', label: 'Chat' },
+  { to: '/check-eligibility', label: 'Check Eligibility' },
   { to: '/apply', label: 'Apply for Loan' },
   { to: '/status', label: 'Check Application Status' },
 ]
