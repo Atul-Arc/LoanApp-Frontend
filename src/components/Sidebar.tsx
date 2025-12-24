@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { FaGithub } from 'react-icons/fa'
 
 type NavItem = { to: string; label: string; end?: boolean }
 
@@ -12,7 +13,6 @@ const navItems: NavItem[] = [
 export function Sidebar() {
   return (
     <aside className="sidebar" aria-label="Primary">
-      
       <nav className="sidebar__nav">
         {navItems.map((item) => (
           <NavLink
@@ -27,6 +27,18 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
+
+      <div className="sidebar__footer">
+        <a
+          href="https://github.com/Atul-Arc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sidebar__link"
+        >
+          <FaGithub />
+          <span>GitHub</span>
+        </a>
+      </div>
     </aside>
   )
 }

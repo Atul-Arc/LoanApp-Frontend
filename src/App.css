@@ -63,6 +63,8 @@
   background: var(--sidebar);
   border-right: 1px solid var(--border);
   padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar__top {
@@ -80,6 +82,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 4px;
+  flex-grow: 1;
 }
 
 .sidebar__link {
@@ -98,6 +101,18 @@
 .sidebar__link--active {
   background: var(--surface);
   outline: 1px solid var(--border);
+}
+
+.sidebar__footer {
+  padding-top: 12px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar__footer .sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .sidebar__link--active::before {
