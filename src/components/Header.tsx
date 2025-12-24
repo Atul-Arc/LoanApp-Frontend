@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 export function Header() {
   // Mock user name - in a real app, this would come from auth context or state
-  const [userName] = useState('John Doe')
+  const [userName] = useState('Atul Kharecha')
   const navigate = useNavigate()
 
   const handleLogout = () => {
