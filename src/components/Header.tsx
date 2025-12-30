@@ -18,7 +18,7 @@ export function Header() {
     <header className="header">
       <div className="header__content">
         <div className="header__brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
-          Loan App
+          Loan Eligibility
         </div>
         <div className="header__user">
           <span className="header__user-name">Welcome, {userName}</span>
