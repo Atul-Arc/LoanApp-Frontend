@@ -1,14 +1,21 @@
 import { NavLink } from 'react-router-dom'
-import { FaGithub } from 'react-icons/fa'
+import {
+  FaHome,
+  FaComments,
+  FaClipboardCheck,
+  FaFileContract,
+  FaTasks,
+} from 'react-icons/fa'
+import type { IconType } from 'react-icons'
 
-type NavItem = { to: string; label: string; end?: boolean }
+type NavItem = { to: string; label: string; end?: boolean; icon: IconType }
 
 const navItems: NavItem[] = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/chat', label: 'Chat' },
-  { to: '/check-eligibility', label: 'Check Eligibility' },
-  { to: '/apply', label: 'Apply for Loan' },
-  { to: '/status', label: 'Check Application Status' },
+  { to: '/', label: 'Home', end: true, icon: FaHome },
+  { to: '/chat', label: 'Chat', icon: FaComments },
+  { to: '/check-eligibility', label: 'Check Eligibility', icon: FaClipboardCheck },
+  { to: '/apply', label: 'Apply for Loan', icon: FaFileContract },
+  { to: '/status', label: 'Check Application Status', icon: FaTasks },
 ]
 
 export function Sidebar() {
@@ -24,22 +31,11 @@ export function Sidebar() {
               `sidebar__link${isActive ? ' sidebar__link--active' : ''}`
             }
           >
-            {item.label}
+            <item.icon />
+            <span>{item.label}</span>
           </NavLink>
         ))}
       </nav>
-
-      <div className="sidebar__footer">
-        <a
-          href="https://github.com/Atul-Arc"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sidebar__link"
-        >
-          <FaGithub />
-          <span>GitHub</span>
-        </a>
-      </div>
     </aside>
   )
 }

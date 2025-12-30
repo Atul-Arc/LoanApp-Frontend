@@ -5,7 +5,7 @@ export function HomePage() {
         <div>
           <h1 className="pageTitle">Home</h1>
           <p className="pageSubtitle">
-            Manage your loans and applications in one place using AI-Powered Loan Eligibility Assistant
+            Asses your loan eligibility in seconds using AI-Powered Loan Eligibility Assistant
           </p>
         </div>
       </header>

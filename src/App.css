@@ -67,16 +67,6 @@
   flex-direction: column;
 }
 
-.sidebar__top {
-  padding: 8px 10px 14px;
-}
-
-.sidebar__brand {
-  font-size: 14px;
-  font-weight: 650;
-  letter-spacing: 0.2px;
-}
-
 .sidebar__nav {
   display: flex;
   flex-direction: column;
@@ -87,7 +77,9 @@
 
 .sidebar__link {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 10px 12px;
   border-radius: 10px;
   color: var(--text);
@@ -101,18 +93,6 @@
 .sidebar__link--active {
   background: var(--surface);
   outline: 1px solid var(--border);
-}
-
-.sidebar__footer {
-  padding-top: 12px;
-  margin-top: auto;
-  border-top: 1px solid var(--border);
-}
-
-.sidebar__footer .sidebar__link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 .sidebar__link--active::before {
@@ -159,26 +139,6 @@
   font-size: 16px;
   color: #666;
   margin-bottom: 20px;
-}
-
-.searchRow {
-  display: flex;
-}
-
-.searchBox {
-  width: min(720px, 100%);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 12px;
-}
-
-.searchInput {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 13px;
 }
 
 .section {
@@ -395,6 +355,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 13px;
+  font-family: inherit;
 }
 
 .submitButton {
@@ -410,4 +371,27 @@
 
 .submitButton:hover {
   background-color: #0056b3;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--sidebar);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.footer__link:hover {
+  color: var(--text);
 }

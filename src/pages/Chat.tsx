@@ -86,7 +86,7 @@ export function ChatPage() {
       <header className="pageHeader">
         <div>
           <h1 className="pageTitle">Chat</h1>
-          <p className="pageSubtitle">Ask questions about eligibility or status.</p>
+          <p className="pageSubtitle">Ask questions about our various loans products and check your eligibility.</p>
         </div>
         <button
           onClick={handleClearChat}

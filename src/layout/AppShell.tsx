@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
+import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { Sidebar } from '../components/Sidebar'
 
@@ -13,6 +14,7 @@ export function AppShell({ children }: PropsWithChildren) {
           <div className="appShell__content">{children}</div>
         </main>
       </div>
+      <Footer />
     </div>
   )
 }
