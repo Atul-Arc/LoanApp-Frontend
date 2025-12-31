@@ -6,7 +6,7 @@ import { AppShell } from './layout/AppShell'
 import { ApplyForLoanPage } from './pages/ApplyForLoan'
 import { ChatPage } from './pages/Chat'
 import { CheckApplicationStatusPage } from './pages/CheckApplicationStatus'
-import { CheckEligibility } from './pages/CheckEligibility'
+import { LoanEligibilityPage } from './pages/LoanEligibility'
 import { HomePage } from './pages/Home'
 
 function App() {
@@ -15,7 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/chat" element={<ChatPage />} />
-        <Route path="/check-eligibility" element={<CheckEligibility />} />
+        <Route path="/loan-eligibility" element={<LoanEligibilityPage />} />
+        <Route path="/check-eligibility" element={<LoanEligibilityPage />} />
         <Route path="/apply" element={<ApplyForLoanPage />} />
         <Route path="/status" element={<CheckApplicationStatusPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

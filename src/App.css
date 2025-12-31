@@ -90,6 +90,17 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
+.sidebar__link--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: none;
+  border: 1px dashed transparent;
+}
+
+.sidebar__link--disabled:hover {
+  background: none;
+}
+
 .sidebar__link--active {
   background: var(--surface);
   outline: 1px solid var(--border);
@@ -104,6 +115,17 @@
   width: 3px;
   border-radius: 3px;
   background: var(--accent);
+}
+
+.sidebar__chip {
+  margin-left: auto;
+  padding: 2px 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--muted);
 }
 
 .appShell__main {
@@ -130,13 +152,13 @@
 }
 
 .pageTitle {
-  font-size: 24px;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
 .pageSubtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   margin-bottom: 20px;
 }
@@ -380,6 +402,84 @@
   border-radius: 4px;
   font-size: 13px;
   font-family: inherit;
+}
+
+.formError {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #b42318;
+}
+
+.formHelper {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.eligibilityResult {
+  margin-top: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radiusLg);
+  background: var(--surface);
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eligibilityResult--success {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.2);
+}
+
+.eligibilityResult--error {
+  border-color: #b42318;
+  box-shadow: 0 0 0 1px rgba(180, 35, 24, 0.2);
+}
+
+.eligibilityResult__status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eligibilityResult__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.eligibilityResult__remarks {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.eligibilityResult__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.eligibilityResult__metric {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eligibilityResult__metric-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.eligibilityResult__metric-value {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .submitButton {

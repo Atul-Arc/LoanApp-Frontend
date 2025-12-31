@@ -161,7 +161,7 @@ export function ChatPage() {
     setMessages([createWelcomeMessage()])
     setSessionId(generateId())
     setInputValue('')
-    showToast({ message: 'New chat started and cleared the current context.', variant: 'success' })
+    showToast({ message: 'New chat started. Previous context has been cleared.', variant: 'success' })
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {

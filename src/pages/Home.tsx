@@ -15,15 +15,19 @@ export function HomePage() {
         <div className="cardGrid">
           <div className="card">
             <div className="cardTitle">Chat</div>
-            <div className="cardBody">Ask questions and get help.</div>
+            <div className="cardBody">Ask questions and get help related to our various loans products.</div>
+          </div>
+          <div className="card">
+            <div className="cardTitle">Loan Eligibility</div>
+            <div className="cardBody">Run an instant eligibility check. No Profile creation required.</div>
           </div>
           <div className="card">
             <div className="cardTitle">Apply for Loan</div>
-            <div className="cardBody">Start a new loan application.</div>
+            <div className="cardBody">Start a new loan application once eligible.</div>
           </div>
           <div className="card">
             <div className="cardTitle">Check Application Status</div>
-            <div className="cardBody">Track progress of an application.</div>
+            <div className="cardBody">Track progress of your application.</div>
           </div>
         </div>
       </section>
