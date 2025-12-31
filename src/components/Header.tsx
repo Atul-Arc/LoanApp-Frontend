@@ -20,12 +20,12 @@ export function Header() {
         <div className="header__brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
           Loan Eligibility
         </div>
-        <div className="header__user">
+        {/* <div className="header__user">
           <span className="header__user-name">Welcome, {userName}</span>
           <button className="header__logout" onClick={handleLogout}>
             Log Out
           </button>
-        </div>
+        </div> */}
       </div>
     </header>
   )
