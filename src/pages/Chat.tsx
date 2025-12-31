@@ -1,5 +1,6 @@
 import type { KeyboardEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import { useToast } from '../components/ToastProvider'
 
 type Message = {
   id: string
@@ -74,8 +75,7 @@ export function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([createWelcomeMessage()])
   const [inputValue, setInputValue] = useState('')
   const [isSending, setIsSending] = useState(false)
-  const [isClearing, setIsClearing] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const { showToast } = useToast()
 
   const [sessionId, setSessionId] = useState(() => {
     const storedId = readStoredSessionId()
@@ -116,7 +116,6 @@ export function ChatPage() {
     setMessages(prev => [...prev, userMessage])
     setInputValue('')
     setIsSending(true)
-    setError(null)
 
     try {
       const response = await fetch(CHAT_API_URL, {
@@ -151,41 +150,18 @@ export function ChatPage() {
       setMessages(prev => [...prev, botMessage])
     } catch (err) {
       console.error('Failed to send chat message', err)
-      setError('Could not send the message. Please try again.')
+      const errorMessage = 'Could not send the message. Please try again.'
+      showToast({ message: errorMessage, variant: 'error' })
     } finally {
       setIsSending(false)
     }
   }
 
-  const handleClearChat = async () => {
-    if (isClearing) {
-      return
-    }
-
-    setIsClearing(true)
-    setError(null)
-
-    try {
-      if (sessionId) {
-        const response = await fetch(`${CHAT_API_URL}/${encodeURIComponent(sessionId)}`, {
-          method: 'DELETE',
-        })
-
-        if (!response.ok && response.status !== 404) {
-          throw new Error('Failed to clear session on server')
-        }
-      }
-    } catch (err) {
-      console.error('Failed to clear chat session', err)
-      setError('Could not clear the chat history. Please try again.')
-      setIsClearing(false)
-      return
-    }
-
+  const handleStartNewChat = () => {
     setMessages([createWelcomeMessage()])
     setSessionId(generateId())
     setInputValue('')
-    setIsClearing(false)
+    showToast({ message: 'New chat started and cleared the current context.', variant: 'success' })
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -203,12 +179,11 @@ export function ChatPage() {
           <p className="pageSubtitle">Ask questions about our various loans products and check your eligibility.</p>
         </div>
         <button
-          onClick={handleClearChat}
+          onClick={handleStartNewChat}
           className="clearChatButton"
-          title="Clear chat history"
-          disabled={isClearing}
+          title="Start a new chat"
         >
-          {isClearing ? 'Clearing…' : 'New Chat'}
+          New Chat
         </button>
       </header>
 
@@ -239,12 +214,6 @@ export function ChatPage() {
             )
           })}
         </div>
-
-        {error && (
-          <div className="chatStatus chatStatus--error" role="alert">
-            {error}
-          </div>
-        )}
 
         <div className="chatInput">
           <div className="chatInput__container">
