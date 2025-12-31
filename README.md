@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Loan Eligibility Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern React + TypeScript frontend for assessing loan eligibility, chatting with the assistant, and managing loan-related workflows. The app ships with a responsive layout, toast notifications, and a domain-specific API client layer.
 
-Currently, two official plugins are available:
+## Functional Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home dashboard** with quick actions for chat, eligibility checks, and application flows.
+- **Loan Eligibility experience** that:
+  - Fetches loan types and enforces employment-type constraints.
+  - Captures income, EMI, credit score, request amount, tenure, and DOB.
+  - Calls the eligibility API and renders results (status, remarks, EMI metrics).
+  - Provides client-side validation and friendly error states.
+- **Chat assistant** for conversational help, session persistence, and bot responses.
+- **Global toast system** for success/error feedback.
+- **Sidebar navigation** with disabled work-in-progress entries clearly labeled.
 
-## React Compiler
+## Technical Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 18 + TypeScript, bundled by Vite.
+- **State management**: Local hooks (`useState`, `useEffect`, `useMemo`) per page; no global store required yet.
+- **Routing**: `react-router-dom` with routes declared in `src/App.tsx` and wrapped by `AppShell` layout.
+- **API client**: `src/api/loan.ts` centralizes HTTP calls for loan types and eligibility checks, enforcing env-driven configuration and consistent JSON/Error handling.
+- **UI shell**: Shared header, sidebar, and footer components ensure consistent layout. Sidebar highlights active routes and shows WIP badges for disabled links.
+- **Styling**: Global styles in `src/App.css`; layout uses CSS grid/flexbox with utility classes for cards, forms, and result panels.
+- **Toast notifications**: Context-based provider at `src/components/ToastProvider.tsx` with an imperative `showToast` hook.
+- **Form ergonomics**: Numeric parsing helpers, range clamping (e.g., credit score 0-900), and disabled states until prerequisites load.
 
-## Expanding the ESLint configuration
+## Environment Configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Place required variables in `.env` (Vite exposes them as `import.meta.env`):
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+VITE_CHAT_API_URL=http://localhost:5250/api/Chat
+VITE_CHAT_DEFAULT_USER=default-user
+VITE_LOAN_TYPES_URL=http://localhost:5250/api/Loan/loantypes
+VITE_CHECK_ELIGIBILITY_URL=http://localhost:5250/api/Loan/check-eligibility
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- All API calls rely on these values. Missing variables throw descriptive errors at runtime to avoid silently hitting the wrong origin.
+- Restart the dev server after any `.env` change.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Local Development
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Install dependencies: `npm install`
+2. Run the app: `npm run dev`
+3. Open the URL printed by Vite (default `http://localhost:5173`).
+4. For production builds: `npm run build` followed by `npm run preview` to smoke test the output.
+
+## Testing the Loan Eligibility Flow
+
+1. Verify the Loan Eligibility route loads loan types (check network tab or API logs).
+2. Ensure a loan type requiring `(Salaried)` enforces the Salaried employment option, and likewise for `(Self Employed)`.
+3. Submit valid data and confirm the result panel renders status, remarks, and EMI metrics when available.
+4. Simulate network failures (stop backend or tweak env URLs) to verify toast-based error reporting and form disabling.
+
+## Deployment Notes
+
+- Build artifacts sit in `dist/` and can be hosted on any static server.
+- Configure reverse proxies or Vite dev server proxies if backend APIs are not on the same origin.
+- Keep `.env` out of version control if it contains environment-specific secrets; share sanitized values via deployment pipelines or secret stores.
+
+## Future Enhancements
+
+- Add integration tests around the eligibility form using Playwright or Cypress.
+- Expand API client to cover application submission and status checks once backend endpoints are ready.
+- Introduce analytics or logging hooks to capture eligibility attempts and failure reasons.
