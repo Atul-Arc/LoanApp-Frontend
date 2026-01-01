@@ -30,8 +30,11 @@ Modern React + TypeScript frontend for assessing loan eligibility, chatting with
 Place required variables in `.env` (Vite exposes them as `import.meta.env`):
 
 ```
-VITE_CHAT_API_URL=http://localhost:5250/api/Chat
-VITE_CHAT_DEFAULT_USER=default-user
+# Legacy API URL - Still available and can be switched back 
+# VITE_CHAT_API_URL=http://localhost:5250/api/Chat
+# New API URL (With RAG support)
+VITE_CHAT_API_URL=http://localhost:5250/api/v2/chat
+VITE_CHAT_DEFAULT_USER=atul
 VITE_LOAN_TYPES_URL=http://localhost:5250/api/Loan/loantypes
 VITE_CHECK_ELIGIBILITY_URL=http://localhost:5250/api/Loan/check-eligibility
 ```
