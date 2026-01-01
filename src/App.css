@@ -302,6 +302,29 @@
   padding: 0 4px;
 }
 
+.chatMessage__reference {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--muted);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.chatMessage__reference-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chatMessage__reference-value {
+  color: var(--text);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
 .chatInput {
   border-top: 1px solid var(--border);
   padding: 12px;

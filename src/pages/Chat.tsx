@@ -44,6 +44,7 @@ const readStoredSessionId = () => {
 
 // Insert a line break whenever a list marker follows plain text on the same line.
 const LIST_ITEM_BREAK_REGEX = /([^\n\r])[ \t]+(?=(?:[-*•]|\d+[.)])\s+)/g
+const REFERENCE_LINE_REGEX = /^reference:\s*/i
 
 const ensureListItemsAreOnSeparateLines = (text: string) =>
   text.replace(
@@ -201,10 +202,19 @@ export function ChatPage() {
                   {displayLines.length === 0
                     ? message.text
                     : displayLines.map((line, index) => (
-                        <span key={`${message.id}-line-${index}`}>
-                          {line}
-                          {index < displayLines.length - 1 && <br />}
-                        </span>
+                        REFERENCE_LINE_REGEX.test(line) ? (
+                          <span key={`${message.id}-line-${index}`} className="chatMessage__reference">
+                            <span className="chatMessage__reference-label">Reference:</span>
+                            <span className="chatMessage__reference-value">
+                              {line.replace(REFERENCE_LINE_REGEX, '').trim() || 'Not provided'}
+                            </span>
+                          </span>
+                        ) : (
+                          <span key={`${message.id}-line-${index}`}>
+                            {line}
+                            {index < displayLines.length - 1 && <br />}
+                          </span>
+                        )
                       ))}
                 </div>
                 <div className="chatMessage__timestamp">
